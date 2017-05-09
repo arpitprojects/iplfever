@@ -15,14 +15,15 @@
                 <br /><br />
                 <div class="logo">
                     <ul class="logo-text">
-                        <li><img src="https://www.android-kiosk.com/wp-content/themes/androidkioskcom/images/brand_white.png"
+                        <li><img class="" src="https://www.android-kiosk.com/wp-content/themes/androidkioskcom/images/brand_white.png"
                                  id="logo-image"/></li>
                         <li class="text-logo">{{title}}</li>
                     </ul>
                 </div>
 
                 <router-link tag="li" to="/matches" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Matches Data</a></router-link>
-
+                <router-link tag="li" to="/player" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">More Match Stats</a></router-link>
+                <router-link tag="li" to="/analytic" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Analytic Stats</a></router-link>
                 <router-link tag="li" to="/deliveries" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Deliveries Data</a></router-link>
             </ul>
             <div class="container">

@@ -112,3 +112,16 @@ tspan{
     stroke:#fff !important;
     font-weight:normal!important;
 }
+.highcharts-data-label text{
+
+    fill: #fff !important;
+    font-weight: 100 !important;
+    font-size: 12px !important;
+    line-height: 1;
+}
+.highcharts-pie-series .highcharts-point{
+    stroke:unset !important;
+}
+.highcharts-color-0{
+    stroke:unset !important;
+}

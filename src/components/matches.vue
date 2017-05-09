@@ -41,7 +41,7 @@
             loading : function(){
                     this.$http.get('../../data/matches.csv').then(response => {
                         this.data = response.data;
-
+                        console.log(this.data);
 
                         this.data = this.data.split("\n").map(function (d) {
                             return d.split(",");
@@ -59,7 +59,7 @@
                 
 
                         //console.log(headers);
-                        //console.log(this.data);
+                        console.log(this.data);
                         
                         //First graph manupilation
                         

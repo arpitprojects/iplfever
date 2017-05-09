@@ -1,0 +1,31 @@
+<input type="text">
+
+
+<script src="vendors/js/jquery.min.js"></script>
+<script>
+
+					
+                	$.get( "data/deliveries.csv", function( data ) {
+					  console.log(data);
+					  alert( "Load was performed." );
+					});
+                        var headers = [];
+                        
+
+                        // data = data.split("\n").map(function (d) {
+                        //     return d.split(",");
+                        // });
+                        // data.pop();
+                        // headers = (data).splice(0, 1)[0];
+
+                        // data = (data).map(function (v, i) {
+                        //     var x = {};
+                        //     (headers).forEach(function (h, i) {
+                        //         x[h] = v[i];
+                        //     });
+                        //     return x;
+                        // });
+
+                        console.log(data);
+
+</script>
