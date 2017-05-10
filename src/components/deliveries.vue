@@ -1,5 +1,5 @@
 <template>
-     <div>
+     <div id="container_delivery">
         <br /><br /><br /><br /><br /><br />
         <p class="text-matches-title">Runs Across the seasons</p>
         <br />
@@ -8,6 +8,12 @@
         <div id="six_total_play"></div>
         <br /><br />
         <div id="most_wickets"></div>
+         <div id="loader-wrapper">
+            <div id="loader"></div>        
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+            <p >Analysing 1.5 lacs rows</p>
+        </div>
     </div>
 </template>
 
@@ -25,6 +31,12 @@
         },
         methods:{
             loading : function(){
+              
+                    setTimeout(function() {
+                        document.getElementById('container_delivery').className = 'loaded';      
+                    }, 20000);
+                
+
                  this.$http.get('../../data/deliveries.csv').then(response => {
                         this.data = response.data;
                         var parsed_data;
@@ -333,5 +345,8 @@
         color:#000;
         margin-left:1%;
     }
-
+    .preloader-wrapper.big{
+        height:125px;
+        width:125px;
+    }
 </style>

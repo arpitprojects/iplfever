@@ -125,3 +125,6 @@ tspan{
 .highcharts-color-0{
     stroke:unset !important;
 }
+.highcharts-credits{
+    display: none !important;
+}

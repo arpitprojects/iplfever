@@ -41,7 +41,7 @@
             loading : function(){
                     this.$http.get('../../data/matches.csv').then(response => {
                         this.data = response.data;
-                        console.log(this.data);
+                        //console.log(this.data);
 
                         this.data = this.data.split("\n").map(function (d) {
                             return d.split(",");
@@ -59,13 +59,12 @@
                 
 
                         //console.log(headers);
-                        console.log(this.data);
+                        //console.log(this.data);
                         
                         //First graph manupilation
                         
                         var season_arr = [0,0,0,0,0,0,0,0,0];
-                        
-                        (this.data).forEach(function(obj) {
+                           (this.data).forEach(function(obj) {
                             
                             if(obj.season == 2008){
                                 season_arr[0]++;
@@ -95,9 +94,11 @@
                                 season_arr[8]++;
                             }
                         });
+
+                   
                         
                         //Second graph manupilation
-                        
+                        console.log(season_arr);
                         
                         var team_arr = [];
                         var duplicates =[];
@@ -110,7 +111,7 @@
                         
                         var uniques = duplicates.unique(); 
                         
-                        console.log(uniques);
+                        //console.log(uniques);
                         
                         var match_win = [0,0,0,0,0,0,0,0,0,0,0,0,0];
                         var team_win =  [0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -131,8 +132,8 @@
                                 }
                             }
                         });
-                        console.log(match_win);
-                        console.log(team_win); 
+                        //console.log(match_win);
+                        //console.log(team_win); 
                         
                         
                         //Max toss winner
@@ -178,7 +179,7 @@
                         });
                         
                         
-                        console.log(toss_match_final_data);
+                        //console.log(toss_match_final_data);
                         
                        
                         
@@ -288,6 +289,7 @@
                                 data: match_win
                             }]
                         });
+                        
                         Highcharts.chart('toss_data_details', {
                             chart: {
                                 type: 'pie',

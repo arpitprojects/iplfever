@@ -2,7 +2,7 @@
     <div>
         <br /><br /><br /><br /><br /><br />
         <span class="wrapper">
-            <h5>Statstics</h5>
+            <h5>Rarerest Data:</h5>
             <br />
             <span id="all_information">
                 <div class="row">
@@ -54,6 +54,8 @@
                   <div id="umpire_graph"></div>
                   <br /><br />
                   <div id="venue_graph"></div>
+                  <br /><br />
+                  <div id="donut_batting_first"></div>
                   </div>
             </span>
         </span>
@@ -104,6 +106,8 @@
                         var venues = [];
                         var venues_unique = [];
                         var venues_total = [];
+                        var win_by_run = 0 ;
+                        var win_by_wicket = 0;
                          //End of all the variables
                          
                         (this.matches_data).forEach(function(obj){
@@ -159,8 +163,49 @@
                             });
                         }
 
+                        //calculate the 
+                        (this.matches_data).forEach(function(obj){
+                            if(obj.win_by_runs == 0){
+                                win_by_run++;   
+                            }else if(obj.win_by_wickets ==0){
+                                win_by_wicket++;
+                            }
+                        });
                        
+                        console.log((577 - win_by_run) + "  " + (577 - win_by_wicket));
+                        var final_data = [['Batting first wins' , (577 -win_by_run)] , ['Batting second wins' , (577 - win_by_wicket)]];
+
+                        
                         //Generate Highchart
+                        Highcharts.chart('donut_batting_first', {
+                            chart: {
+                                type: 'pie',
+                                options3d: {
+                                    enabled: true,
+                                    alpha: 45
+                                }
+                            },
+                            title: {
+                                text: 'Win By Runs Vs Win By Wickets!'
+                            },
+                            subtitle: {
+                                text: 'Kaggle.com'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    innerSize: 100,
+                                    depth: 45
+                                }
+                            },
+                            series: [{
+                                name: 'Total Match',
+                                data: final_data
+                            }]
+                        });
+
+
+
+
 
                          Highcharts.chart('umpire_graph', {
                             chart: {

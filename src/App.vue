@@ -5,8 +5,8 @@
                 <div class="nav-wrapper nav-color">
                     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li class="waves-effect waves-teal"><a href="">Dashboard</a></li>
-                        <li class="waves-effect waves-teal"><a href="">IPL STATS</a></li>
+                        <li class="waves-effect waves-teal"><a href="https://github.com/arpitprojects/iplfever">Github</a></li>
+                        <li class="waves-effect waves-teal" ><a href="#modal1"><i class="material-icons">question_answer</i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -22,9 +22,12 @@
                 </div>
 
                 <router-link tag="li" to="/matches" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Matches Data</a></router-link>
+                
                 <router-link tag="li" to="/player" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">More Match Stats</a></router-link>
-                <router-link tag="li" to="/analytic" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Analytic Stats</a></router-link>
-                <router-link tag="li" to="/deliveries" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Deliveries Data</a></router-link>
+                
+                <router-link tag="li" to="/analytic" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Miscellaneous Data</a></router-link>
+
+                <router-link tag="li" to="/deliveries" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Player Stats <span style="color:red;"> Loading takes time</span></a></router-link>
             </ul>
             <div class="container">
                 <div class="row">
@@ -36,6 +39,20 @@
                     </div>
                 </div>
             </div>
+           <div id="modal1" class="modal">
+                <div class="modal-content">
+                  <h6>Details About Application</h6>
+                  <br /><br />
+                  <p>
+                    1.)
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Thank You!</a>
+                </div>
+              </div>
+          
+         
         </div>
   </div>
 </template>
