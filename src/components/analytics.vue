@@ -354,6 +354,10 @@
 }
 </script>
 <style scoped>
+.card{
+        width:268px !important;
+        height:100px !important;
+}
     .wrapper h1, p,h2,h4,h5,h6,h3,div,span{
         font-family:'Dosis' , sans-serif;
         letter-spacing:1px;
