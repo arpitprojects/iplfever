@@ -1,3 +1,18 @@
+
 {
-  
+    "short_name": "IPL FEVER",
+    "name": "Making ipl more interesting",
+    "description": "Ipl all season stats!!",
+    "icons": [
+        {
+            "src": "icon/white_brand.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "./?utm_source=web_app_manifest",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#000",
+    "background_color": "#024b68"
 }

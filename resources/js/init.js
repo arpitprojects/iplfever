@@ -13,3 +13,19 @@ $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
  });
+Array.prototype.contains = function(v) {
+    for(var i = 0; i < this.length; i++) {
+        if(this[i] === v) return true;
+    }
+    return false;
+};
+
+Array.prototype.unique = function() {
+    var arr = [];
+    for(var i = 0; i < this.length; i++) {
+        if(!arr.contains(this[i])) {
+            arr.push(this[i]);
+        }
+    }
+    return arr; 
+}

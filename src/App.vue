@@ -23,9 +23,11 @@
 
                 <router-link tag="li" to="/matches" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Matches Data</a></router-link>
                 
-                <router-link tag="li" to="/player" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">More Match Stats</a></router-link>
                 
-                <router-link tag="li" to="/analytic" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Miscellaneous Data</a></router-link>
+                
+                <router-link tag="li" to="/analytic" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Interesting Facts</a></router-link>
+
+                <router-link tag="li" to="/player" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Basic Stats</a></router-link>
 
                 <router-link tag="li" to="/deliveries" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Player Stats <span style="color:red;"> Loading takes time</span></a></router-link>
             </ul>
@@ -43,8 +45,12 @@
                 <div class="modal-content">
                   <h6>Details About Application</h6>
                   <br /><br />
-                  <p>
-                    1.)
+                  <p style="font-size:18px;font-family:'Dosis'; ">
+                    1.)  Hover on each stats section/ line/ pie to get actual values of that part!
+                    <br />
+                    2.)  Few Routes have more than 1.5 lacs row, so manupilating is taking too much time.
+                    <br />
+                    3.)  Service worker works are going on for online stats!
                   </p>
                 </div>
                 <div class="modal-footer">

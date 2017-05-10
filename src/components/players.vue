@@ -100,6 +100,9 @@
                             man_of_match_name.push(player_of_match_unique[x]);
                             man_of_match_num.push(player_of_match_unique_total_store[x]);
                         });
+                        //Player of match Bolwer and batamsn
+                        //console.log(player_of_match_unique);		
+
                         //Toss decision 
 
                         var toss_decision_bat = 0;
@@ -138,7 +141,8 @@
                                     dataLabels: {
                                         enabled: true,
                                         format: '{point.name}'
-                                    }
+                                    },
+                                     showInLegend: true
                                 }
                             },
                             series: [{

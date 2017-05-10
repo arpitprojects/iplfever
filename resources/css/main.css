@@ -111,6 +111,10 @@ tspan{
     color:#fff !important;
     stroke:#fff !important;
     font-weight:normal!important;
+   
+}
+tspan.highcharts-text-outline{
+ display: none !important;
 }
 .highcharts-data-label text{
 
@@ -127,4 +131,11 @@ tspan{
 }
 .highcharts-credits{
     display: none !important;
+}
+.text-purple{
+    color:#000 !important;
+    font-weight:700;
+}
+.text-blue{
+    color:#1a237e;
 }

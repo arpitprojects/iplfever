@@ -4,7 +4,8 @@
        <div class="matches-wrapper">
             <p class="text-matches-title">{{title}}</p>
             <br />
-            <p class="text-main-title">Number of matches year-wise!</p>
+            <p class="text-main-title" style="color:white;font-size:30px;font-weight:400;">IPL Season Stats</p>
+            <br />
             <br /><br/>
             <div id="basic_match_graph"></div>
             <br />
@@ -188,10 +189,10 @@
                                 type: 'column'
                             },
                             title: {
-                                text: 'Number of matches played in IPL so far'
+                                text: 'Matches played in IPL so far !'
                             },
                             subtitle: {
-                                text: 'Kaggle.com'
+                                text: 'Source : (as provided)'
                             },
                             xAxis: {
                                 categories: [
@@ -210,7 +211,7 @@
                             yAxis: {
                                 min: 0,
                                 title: {
-                                    text: 'No of matches playes'
+                                    text: 'No of matches played:'
                                 }
                             },
                             tooltip: {
@@ -239,7 +240,7 @@
                                 type: 'column'
                             },
                             title: {
-                                text: 'Team Wise: Match Played Vs Match Win'
+                                text: 'Matches Played VS Matches Win:'
                             },
                             xAxis: {
                                 categories:uniques
@@ -247,7 +248,7 @@
                             yAxis: {
                                 min: 0,
                                 title: {
-                                    text: 'Number of matches'
+                                    text: 'Number of matches:'
                                 },
                                 stackLabels: {
                                     enabled: true,
@@ -282,14 +283,14 @@
                                 }
                             },
                             series: [{
-                                name: 'Match Played',
+                                name: 'Difference',
                                 data: team_win
                             }, {
                                 name: 'Match Win',
                                 data: match_win
                             }]
                         });
-                        
+
                         Highcharts.chart('toss_data_details', {
                             chart: {
                                 type: 'pie',
@@ -300,7 +301,7 @@
                                 }
                             },
                             title: {
-                                text: 'Team Wise : Toss Win'
+                                text: 'Toss Win Percentage'
                             },
                             tooltip: {
                                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -313,7 +314,8 @@
                                     dataLabels: {
                                         enabled: true,
                                         format: '{point.name}'
-                                    }
+                                    },
+                                    showInLegend : true
                                 }
                             },
                             series: [{
@@ -346,7 +348,8 @@
                                     dataLabels: {
                                         enabled: true,
                                         format: '{point.name}'
-                                    }
+                                    },
+                                    showInLegend : true
                                 }
                             },
                             series: [{

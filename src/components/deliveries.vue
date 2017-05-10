@@ -34,7 +34,7 @@
               
                     setTimeout(function() {
                         document.getElementById('container_delivery').className = 'loaded';      
-                    }, 20000);
+                    }, 2000);
                 
 
                  this.$http.get('../../data/deliveries.csv').then(response => {
@@ -57,6 +57,19 @@
                         var headers_key = Object.keys(headers)    
                         //console.log(headers_key);   
                         
+                        //Optimizations 
+
+                        var keep = ['batsman' , 'batsman_runs' , 'bowler' , 'dismissal_kind'];
+
+                        for(var i = 0;i < parsed_data.length; i++){
+
+                            for(var key in parsed_data[i]){
+                                if(keep.indexOf(key) === -1)delete parsed_data[i][key];
+                            }
+
+                        }
+                        
+
                         //First graph manupilations
                         var topscore_all = [];
                         var topscore_unique = [];
@@ -213,7 +226,7 @@
                                 text: 'Maximum Runs By the Individual'
                             },
                             subtitle: {
-                                text: 'Kaggle.com'
+                                text: 'Source : Kaggle.com'
                             },
                             xAxis: {
                                 categories: name_final_first_graph,
@@ -240,7 +253,7 @@
                                 }
                             },
                             series: [{
-                                name: 'Total Runs',
+                                name: 'Runs Scored',
                                 data: runs_final_score_graph
                             }]
                         });
@@ -275,13 +288,13 @@
                             }
                         },
                         series: [{
-                            name: 'Sales',
+                            name: 'Batsman Name',
                             data: six_num
                         }]
                     });
                         Highcharts.chart('most_wickets', {
                             title: {
-                                text: 'Most Number of Wickets'
+                                text: 'Highest Wicket Taker in IPL.'
                             },
                             xAxis: {
                                 categories: wickets_name
@@ -298,11 +311,11 @@
                             },
                             series: [{
                                 type: 'column',
-                                name: 'Jane',
+                                name: 'Number Of Wickets',
                                 data: wickets_num
                             },{
                                 type: 'spline',
-                                name: 'Average',
+                                name: 'Number Of Wickets',
                                 data: wickets_num,
                                 marker: {
                                     lineWidth: 2,

@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div id="container_delivery">
+       
         <br /><br /><br /><br /><br /><br />
         <span class="wrapper">
-            <h5>Rarerest Data:</h5>
+            <h5>Interesting Facts:</h5>
             <br />
             <span id="all_information">
                 <div class="row">
@@ -10,9 +11,9 @@
                       <div class="card blue darken-3
  waves-effect waves-orange">
                         <div class="card-content white-text">
-                          <p class="font-size-20">Number of Super Over Match:</p>
+                          <p class="font-size-20">Exciting- <span class="text-blue">Super Over Match:</span></p>
                           <br />
-                          <div class="font-size-20" id="total_non_result"></div>
+                          <div class="font-size-20 text-purple" id="total_non_result"></div>
                             </div> 
                          </div>
                       </div>
@@ -22,7 +23,7 @@
                         <div class="card-content white-text">
                           <p class="font-size-20">Number of Dl Method Result:</p>
                           <br />
-                          <div class="font-size-20" id="total_dl_apply"></div>
+                          <div class="font-size-20 text-purple" id="total_dl_apply"></div>
                             </div> 
                          </div>
                       </div>
@@ -33,9 +34,9 @@
                       <div class="card blue darken-3 pulse
  waves-effect waves-orange">
                         <div class="card-content white-text">
-                          <p class="font-size-20">Number win Above 100 Runs:</p>
+                          <p class="font-size-20">Wins more than Runs 100:</p>
                           <br />
-                          <div class="font-size-20" id="total_runs_win"></div>
+                          <div class="font-size-20 text-purple" id="total_runs_win"></div>
                             </div> 
                          </div>
                       </div>
@@ -43,19 +44,19 @@
                       <div class="card blue darken-3
  waves-effect waves-orange">
                         <div class="card-content white-text">
-                          <p class="font-size-20">Number of 10 wickets win is:</p>
+                          <p class="font-size-20">Number of Wins By <span class="text-blue">10 Wickets</span>:</p>
                           <br />
-                          <div class="font-size-20" id="total_wickets_win"></div>
+                          <div class="font-size-20 text-purple" id="total_wickets_win"></div>
                             </div> 
                          </div>
                   </div>
-                  <br /><br />
-                  <br /><br />
                   <div id="umpire_graph"></div>
                   <br /><br />
                   <div id="venue_graph"></div>
                   <br /><br />
                   <div id="donut_batting_first"></div>
+                  <br /><br />
+                  <div id="Extra_Run_by_Bowler"></div>
                   </div>
             </span>
         </span>
@@ -67,11 +68,13 @@
     export default{
         data(){
             return {
-                matches_data :[]
+                matches_data :[],
+                deliveries_data : []
             }
         },
         mounted : function(){
             this.matches();
+            
            
         },
         methods : {
@@ -108,6 +111,9 @@
                         var venues_total = [];
                         var win_by_run = 0 ;
                         var win_by_wicket = 0;
+                        var city = [];
+                        var city_unique = [];
+                        var no_of_city = [];
                          //End of all the variables
                          
                         (this.matches_data).forEach(function(obj){
@@ -175,7 +181,64 @@
                         console.log((577 - win_by_run) + "  " + (577 - win_by_wicket));
                         var final_data = [['Batting first wins' , (577 -win_by_run)] , ['Batting second wins' , (577 - win_by_wicket)]];
 
-                        
+                        (this.matches_data).forEach(function(obj){
+                            city.push(obj.city);
+                        })
+
+                        city_unique = city.unique();
+
+                        for(i=0;i<city_unique.length;i++){
+                            no_of_city[i] = 0;
+                        }
+                        for(i=0;i<city_unique.length;i++){
+                            (this.matches_data).forEach(function(obj){
+                                if(city_unique[i] == obj.city){
+                                    no_of_city[i]++;
+                                }
+                            })
+                        }
+
+
+                            Highcharts.chart('Extra_Run_by_Bowler', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Number Of Matches Played Citywise'
+                            },
+                            subtitle: {
+                                text: 'Source:Kaggle.com'
+                            },
+                            xAxis: {
+                                categories: city_unique,
+                                crosshair: true
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: 'No of matches citywise:'
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                                footerFormat: '</table>',
+                                shared: true,
+                                useHTML: true
+                            },
+                            plotOptions: {
+                                column: {
+                                    pointPadding: 0.2,
+                                    borderWidth: 0
+                                }
+                            },
+                            series: [{
+                                name: 'Cities',
+                                data: no_of_city
+                            }]
+                        });
+
                         //Generate Highchart
                         Highcharts.chart('donut_batting_first', {
                             chart: {
@@ -186,10 +249,10 @@
                                 }
                             },
                             title: {
-                                text: 'Win By Runs Vs Win By Wickets!'
+                                text: 'Matches Wins by Runs/Wickets'
                             },
                             subtitle: {
-                                text: 'Kaggle.com'
+                                text: 'Source :Kaggle.com'
                             },
                             plotOptions: {
                                 pie: {
@@ -209,21 +272,26 @@
 
                          Highcharts.chart('umpire_graph', {
                             chart: {
-                                type: 'line'
+                                type: 'bar'
                             },
                             title: {
-                                text: 'Umpire Vs Total Match'
+                                text: 'Umpiring in all seasons'
                             },
                             subtitle: {
-                                text: 'Kaggle.com'
+                                text: 'Source : Kaggle.com'
                             },
                             xAxis: {
                                 categories: umpires_unique
                             },
                             yAxis: {
                                 title: {
-                                    text: 'Temperature (°C)'
+                                    text: 'Number of matches'
                                 }
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle'
                             },
                             plotOptions: {
                                 line: {
@@ -244,10 +312,10 @@
                                 type: 'column'
                             },
                             title: {
-                                text: 'Venue Matches happend'
+                                text: 'Matches Played on various stadiums'
                             },
                             subtitle: {
-                                text: 'Kaggle.com'
+                                text: 'Source Kaggle.com'
                             },
                             xAxis: {
                                 categories: venues_unique,
@@ -274,16 +342,16 @@
                                 }
                             },
                             series: [{
-                                name: 'Number of Matches',
+                                name: 'Ground\'s Name',
                                 data: venues_total
                             }]
                         });
                         //Dont go beyond this
-                    });
-                
-            }
+            });
+
         }
     }
+}
 </script>
 <style scoped>
     .wrapper h1, p,h2,h4,h5,h6,h3,div,span{

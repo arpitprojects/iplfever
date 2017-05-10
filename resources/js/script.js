@@ -14,7 +14,7 @@ Highcharts.theme = {
    title: {
       style: {
          color: '#fff',
-         textTransform: 'uppercase',
+         textTransform: 'capitalize',
          fontSize: '20px'
       }
    }
