@@ -27,6 +27,8 @@
                 
                 <router-link tag="li" to="/analytic" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Interesting Facts</a></router-link>
 
+                    <router-link tag="li" to="/teams" class="white-text side_nav_texts" exact><a class="side_nav_texts blue darken-4 white-text waves-effect waves-teal">Know About Teams</a></router-link>
+
                 <router-link tag="li" to="/player" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Basic Stats</a></router-link>
 
                 <router-link tag="li" to="/deliveries" class="white-text side_nav_texts" exact><a class="side_nav_texts white-text waves-effect waves-teal">Player Stats <span style="color:red;"> Loading takes time</span></a></router-link>
