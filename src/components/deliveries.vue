@@ -8,6 +8,7 @@
         <div id="six_total_play"></div>
         <br /><br />
         <div id="most_wickets"></div>
+        
          <div id="loader-wrapper">
             <div id="loader"></div>        
             <div class="loader-section section-left"></div>
@@ -28,15 +29,15 @@
         },
         mounted :function() {
             this.loading();
+            this.matches();
         },
         methods:{
             loading : function(){
               
                     setTimeout(function() {
                         document.getElementById('container_delivery').className = 'loaded';      
-                    }, 2000);
+                    }, 20000);
                 
-
                  this.$http.get('../../data/deliveries.csv').then(response => {
                         this.data = response.data;
                         var parsed_data;
@@ -49,26 +50,17 @@
                         });
                         //console.log(parsed_data);
                         //Do all the manupilations
-                         var headers = [];
-                        var i , j;
-
-                       
-                        headers = (parsed_data).splice(0, 1)[0];
-                        var headers_key = Object.keys(headers)    
-                        //console.log(headers_key);   
+   
                         
                         //Optimizations 
-
                         var keep = ['batsman' , 'batsman_runs' , 'bowler' , 'dismissal_kind'];
-
                         for(var i = 0;i < parsed_data.length; i++){
-
                             for(var key in parsed_data[i]){
                                 if(keep.indexOf(key) === -1)delete parsed_data[i][key];
                             }
-
                         }
                         
+                        //console.log(JSON.stringify(parsed_data));
 
                         //First graph manupilations
                         var topscore_all = [];
@@ -81,11 +73,11 @@
                         var total_wickets_store = [];
                          (parsed_data).forEach(function(obj){
                                 topscore_all.push(obj.batsman);
-                                bowlers.push(obj.bowler);
+                                
                          });
                          
                          topscore_unique = topscore_all.unique();
-                         bowlers_unique = bowlers.unique();
+                         
                          
                          
                          
@@ -99,10 +91,7 @@
                             total_six_non_sort[i] = 0;
                          }
                         
-                        for(i=0;i<bowlers_unique.length;i++){
-                            total_wickets[i] = 0;
-                            total_wickets_store[i] = 0;
-                        }
+                       
                         
                         
                         //console.log(total_wickets);    
@@ -121,16 +110,7 @@
                         }
                         //for loop for the stroring the number of wivckers
                         
-                        for(i=0;i<bowlers_unique.length;i++){
-                            parsed_data.forEach(function(obj){
-                                if(bowlers_unique[i] == obj.bowler){
-                                    if(obj.dismissal_kind == 'caught' || obj.dismissal_kind == 'lbw' || obj.dismissal_kind == 'bowled' || obj.dismissal_kind == 'stumped' || obj.dismissal_kind == 'caught and bowled'){
-                                        total_wickets[i]++;
-                                        total_wickets_store[i]++;
-                                    }
-                                }
-                            });
-                        }
+                     
                         //console.log(total_wickets);
                        //console.log(total_six_batsman);
                        
@@ -161,10 +141,7 @@
                         for(i=total_six_batsman.length-1;i > total_six_batsman.length-11;i--){
                             total_six_batsman_six_index.push(total_six_batsman[i]);
                         }
-                        for(i=total_wickets.length-1;i > total_wickets.length-11;i--){
-                            total_wickets_ten.push(total_wickets[i]);   
-                        }
-                        
+                       
                         
                        topscore_unique_runs_index_ten.forEach(function(x){
                             for(i=0;i<top_new.length;i++){
@@ -173,14 +150,7 @@
                                 }
                             }
                        });
-                       total_wickets_ten.forEach(function(x){
-                            for(i=0;i<total_wickets_store.length;i++){
-                                if(x ===total_wickets_store[i] ){
-                                    total_wickets_ten_index.push(i);
-                                }
-                            }
-                       })
-                        
+                   
                         
                        total_six_batsman_six_index.forEach(function(x){
                             for(i=0;i<total_six_non_sort.length;i++){
@@ -210,12 +180,7 @@
                             six_num.push(total_six_non_sort[x]);
                         });
                         //Third graph manupilations
-                        
-                        total_wickets_ten_index.forEach(function(x){
-                            wickets_name.push(bowlers_unique[x]);
-                            wickets_num.push(total_wickets_store[x]);
-                        })
-                        
+                     
                             /*High charts Graph*/
                             
                             Highcharts.chart('player_runs_graph', {
@@ -292,74 +257,83 @@
                             data: six_num
                         }]
                     });
-                        Highcharts.chart('most_wickets', {
-                            title: {
-                                text: 'Highest Wicket Taker in IPL.'
-                            },
-                            xAxis: {
-                                categories: wickets_name
-                            },
-                            labels: {
-                                items: [{
-                                    html: 'Total Wickets By bowler',
-                                    style: {
-                                        left: '50px',
-                                        top: '18px',
-                                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                                    }
-                                }]
-                            },
-                            series: [{
-                                type: 'column',
-                                name: 'Number Of Wickets',
-                                data: wickets_num
-                            },{
-                                type: 'spline',
-                                name: 'Number Of Wickets',
-                                data: wickets_num,
-                                marker: {
-                                    lineWidth: 2,
-                                    lineColor: Highcharts.getOptions().colors[3],
-                                    fillColor: 'white'
-                                }
-                            }],
-                                center: [100, 80],
-                                size: 100,
-                                showInLegend: false,
-                                dataLabels: {
-                                    enabled: false
-                                }
-                            });
-                        
                         /*All the highchart*/
                          
                          
                          
                     });
                 
-              }
+              },
+              matches : function(){
+                 this.$http.get('../../data/matches.csv').then(response => {
+                        this.matches_data = response.data;
+                        
+
+                        this.matches_data = this.matches_data.split("\n").map(function (d) {
+                            return d.split(",");
+                        });
+                        this.matches_data.pop();
+                        var headers = this.matches_data.splice(0, 1)[0];
+
+                        this.matches_data = this.matches_data.map(function (v, i) {
+                            var x = {};
+                            headers.forEach(function (h, i) {
+                                x[h] = v[i];
+                            });
+                            return x;
+                        });
+                    //Variables
+                    
+                    var toss_winner_decison = 0; 
+                    var toss_winner_non_descision = 0;
+                    //End of the variables.
+                    
+                    //manupilations
+                    (this.matches_data).forEach(function(obj){
+                        if(obj.result === 'normal'){
+                            toss_winner_decison++;
+                        }else{
+                            toss_winner_non_descision++;
+                        }
+                    })
+                    console.log(toss_winner_decison);
+                    var toss_match_final_data = [['Yes' , toss_winner_decison] , ['No' , toss_winner_non_descision]];
+                     Highcharts.chart('most_wickets', {
+                            chart: {
+                                type: 'pie',
+                                options3d: {
+                                    enabled: true,
+                                    alpha: 35,
+                                    beta: 0
+                                }
+                            },
+                            title: {
+                                text: 'Normal Wining Or tie/Superover?'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    depth: 35,
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '{point.name}'
+                                    },
+                                    showInLegend : true
+                                }
+                            },
+                            series: [{
+                                type: 'pie',
+                                name: 'Toss Win selected batting or feild',
+                                data:toss_match_final_data
+                            }]
+                        });
+                    
+                });
+            }
         }
 }
-
 </script>
-
-<style scoped>
-   .text-matches-title{
-        font-family:'Dosis' , sans-serif;
-        font-size:20px;
-        color:#000;
-        font-weight:700;
-        margin-left:1%;
-    }
-    .text-main-title{
-        font-weight:700;
-        font-family:'Dosis' , sans-serif;
-        font-size:24px;
-        color:#000;
-        margin-left:1%;
-    }
-    .preloader-wrapper.big{
-        height:125px;
-        width:125px;
-    }
-</style>
